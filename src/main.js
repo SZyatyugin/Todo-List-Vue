@@ -4,5 +4,5 @@ import App from "./components/app";
 Vue.config.productionTip = false;
 
 new Vue({
-    render: h => h(App)
+    render: h => h(App),
 }).$mount("#app");

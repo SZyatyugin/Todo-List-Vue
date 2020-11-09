@@ -19,14 +19,14 @@ export default {
         AppHeader,
         AppAddTodo,
         AppFilters,
-        AppTodoList
+        AppTodoList,
     },
     data() {
         return {
             appHeader: "Todo List",
-            filters: ["All", "Active", "Done"],
+            filters: ["All", "Active", "Done",],
             activeFilter: "",
-            todoStore: []
+            todoStore: [],
         };
     },
     methods: {
@@ -45,7 +45,7 @@ export default {
                 id: todoId,
                 name: value,
                 done: false,
-                important: false
+                important: false,
             });
             console.log(this.todoStore);
         },
@@ -60,8 +60,8 @@ export default {
                 }
                 return elem;
             });
-        }
-    }
+        },
+    },
 };
 </script>
 

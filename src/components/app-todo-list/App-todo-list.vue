@@ -16,18 +16,18 @@ import AppTodoListItems from "../app-todo-list-items";
 export default {
     name: "AppTodoList",
     components: {
-        AppTodoListItems
+        AppTodoListItems,
     },
     props: {
         todoStore: {
             type: Array,
-            required: true
+            required: true,
         },
         setTodoDone: {
             type: Function,
-            required: true
-        }
-    }
+            required: true,
+        },
+    },
 };
 </script>
 

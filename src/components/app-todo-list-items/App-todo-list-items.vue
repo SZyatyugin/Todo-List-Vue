@@ -15,14 +15,14 @@ export default {
     props: {
         todo: {
             type: Object,
-            required: true
-        }
+            required: true,
+        },
     },
     methods: {
         setTodoDone(id) {
             this.$emit("settododone", id);
-        }
-    }
+        },
+    },
 };
 </script>
 

@@ -12,9 +12,9 @@ export default {
     props: {
         filters: {
             type: Array,
-            required: true
-        }
-    }
+            required: true,
+        },
+    },
 };
 </script>
 

@@ -10,9 +10,9 @@ export default {
     props: {
         header: {
             type: String,
-            required: true
-        }
-    }
+            required: true,
+        },
+    },
 };
 </script>
 <style lang="scss">

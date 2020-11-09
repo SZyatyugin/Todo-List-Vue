@@ -16,7 +16,7 @@ export default {
     name: "AppAddTodo",
     data() {
         return {
-            inputValue: ""
+            inputValue: "",
         };
     },
     methods: {
@@ -27,8 +27,8 @@ export default {
             }
             this.$emit("addtodo", this.inputValue);
             this.inputValue = "";
-        }
-    }
+        },
+    },
 };
 </script>
 
