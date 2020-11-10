@@ -1,4 +1,4 @@
-{   "plugins": ["vue","prettier"],
+{   "plugins": ["vue"],
     "parser": "vue-eslint-parser",
     "root": true,
     "env": {
@@ -6,8 +6,8 @@
         },
     
         "extends": [
-          "plugin:vue/recommended",
           "eslint:recommended",
+          "plugin:vue/vue3-recommended",
           "prettier",
           "prettier/vue"
         ],
@@ -21,12 +21,7 @@
             "jsx": false
           }
         },
-        "settings": {
-          "eslint.validate":[
-            "javascript",
-            "javascriptreact",
-            "vue"
-          ],
+        "settings":{
           "prettier-vue": {
             // Settings for how to process Vue SFC Blocks
             "SFCBlocks": {
@@ -94,9 +89,11 @@
         "semi": ["error", "always"],
 
         // override default options for rules from base configurations
-        "comma-dangle": ["error", "always"],
+        "comma-dangle": ["error", "only-multiline"],
         "no-cond-assign": ["error", "always"],
-
+          "vue/require-explicit-emits":["error",{
+            "allowProps":true
+          }],
         // disable rules from base configurations
         "no-console": "off"
         }

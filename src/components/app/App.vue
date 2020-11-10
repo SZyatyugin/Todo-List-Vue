@@ -24,7 +24,7 @@ export default {
     data() {
         return {
             appHeader: "Todo List",
-            filters: ["All", "Active", "Done",],
+            filters: ["All", "Active", "Done"],
             activeFilter: "",
             todoStore: [],
         };
