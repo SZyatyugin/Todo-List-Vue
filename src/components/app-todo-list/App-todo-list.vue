@@ -1,14 +1,14 @@
 <template>
-    <div class="app-todo-list">
-        <ul>
-            <AppTodoListItems
-                v-for="elem in todoStore"
-                :key="elem.id"
-                :todo="elem"
-                @settododone="setTodoDone"
-            />
-        </ul>
-    </div>
+    <ul class="col-12">
+        <AppTodoListItems
+            v-for="elem in todoStore"
+            :key="elem.id"
+            :todo="elem"
+            @settododone="settododone"
+            @removetodoitem="removetodoitem"
+            @maketodoimportant="maketodoimportant"
+        />
+    </ul>
 </template>
 
 <script>
@@ -23,9 +23,17 @@ export default {
             type: Array,
             required: true,
         },
-        setTodoDone: {
+        settododone: {
             type: Function,
             required: true,
+        },
+        removetodoitem: {
+            type: Function,
+            required: true,
+        },
+        maketodoimportant:{
+            type:Function,
+            required:true,
         },
     },
 };

@@ -1,9 +1,28 @@
 <template>
-    <div id="app">
-        <AppHeader :header="appHeader" />
-        <AppAddTodo @addtodo="addTodo" />
-        <AppFilters :filters="filters" />
-        <AppTodoList :todo-store="todoStore" :set-todo-done="setTodoDone" />
+    <div class="shadow p-3 mb-5 bg-white rounded">
+        <div class="container">
+            <div class="row">
+                <AppHeader :header="appHeader" />
+            </div>
+            <div class="row justify-content-between">
+                <AppAddTodo @addtodo="addTodo" />
+            </div>
+            <div class="row justify-content-center mt-3">
+                <AppFilters
+                    :filters="filters"
+                    @getfilter="getFilter"
+                    @searchtodosinputvalue="searchTodosInputValue"
+                />
+            </div>
+            <div class="row">
+                <AppTodoList
+                    :todo-store="filteredTodos"
+                    :settododone="setTodoDone"
+                    :removetodoitem="removeTodoItem"
+                    :maketodoimportant="makeTodoImportant"
+                />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -25,9 +44,15 @@ export default {
         return {
             appHeader: "Todo List",
             filters: ["All", "Active", "Done"],
-            activeFilter: "",
+            activeFilter: null,
             todoStore: [],
+            inputValueSearch:""
         };
+    },
+    computed: {
+        filteredTodos() { 
+            return this.filterTodos(this.searchTodos(this.inputValueSearch),this.activeFilter);
+        },
     },
     methods: {
         addTodo(value) {
@@ -35,22 +60,25 @@ export default {
             if (this.todoStore.length === 0) {
                 todoId = 0;
             } else {
+                todoId = 0;
                 this.todoStore.map(elem => {
                     if (elem.id >= todoId) {
-                        todoId = elem.id;
+                        todoId = elem.id + 1;
                     }
                 });
             }
-            this.todoStore.push({
+            let newTodos = [...this.todoStore];
+            newTodos.push({
                 id: todoId,
                 name: value,
                 done: false,
                 important: false,
             });
-            console.log(this.todoStore);
+            this.todoStore = newTodos;
         },
         setTodoDone(id) {
-            this.todoStore.map(elem => {
+            let newTodos = [...this.todoStore];
+            newTodos.map(elem => {
                 if (elem.id === id) {
                     if (!elem.done) {
                         elem.done = true;
@@ -60,6 +88,56 @@ export default {
                 }
                 return elem;
             });
+            this.todoStore = newTodos;
+        },
+        makeTodoImportant(id) {
+            let newTodos=[...this.todoStore].map((elem)=>{
+                if(elem.id===id){
+                    if(!elem.important){
+                        elem.important=true;
+                    }else{
+                        elem.important=false;
+                    };
+                };
+                return elem;
+            });
+            this.todoStore=newTodos;
+        },
+        removeTodoItem(id) {
+            console.log(this.todoStore);
+            let elemToDelete=this.todoStore.findIndex((elem,index)=>{if(elem.id===id){console.log(elem.id===id);return index;}});
+            console.log(elemToDelete);
+            let newTodos = [...this.todoStore.slice(0,elemToDelete),...this.todoStore.slice(elemToDelete+1,this.todoStore.length)];
+            console.log(newTodos);
+            this.todoStore=newTodos;
+
+        },
+        searchTodos(value){
+            if(!value){
+                return this.todoStore;
+            }
+            return this.todoStore.filter((elem)=>{
+                if(elem.name.indexOf(value)>-1){
+                    return elem;
+                };
+            });
+        },
+        searchTodosInputValue(value) {
+            this.inputValueSearch=value;
+        },
+        filterTodos(todos,filter) {
+            if (filter === null || filter === "All") {
+                return todos;
+            }
+            if (filter === "Active") {
+                return todos.filter(elem => !elem.done);
+            }
+            if (filter === "Done") {
+                return todos.filter(elem => elem.done);
+            }
+        },
+        getFilter(filter) {
+            this.activeFilter = filter;
         },
     },
 };
@@ -69,7 +147,7 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 #app {
-    width: 40vw;
+    width: 60vw;
     margin: 20vh auto;
 }
 * {

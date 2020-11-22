@@ -1,10 +1,13 @@
 <template>
-    <li :class="{ done: todo.done }">
+    <li :class="{ done: todo.done, important:todo.important }">
         <span class="todo" @click="setTodoDone(todo.id)">{{ todo.name }}</span
         ><span class="todo-btn"
             ><i v-if="todo.done" class="fa fa-check-circle-o"></i
-            ><i class="fa fa-exclamation-circle"></i
-            ><i class="fa fa-times-circle-o"></i
+            ><i class="fa fa-exclamation-circle" @click="()=>{this.$emit('maketodoimportant',todo.id)}"></i
+            ><i
+                class="fa fa-times-circle-o"
+                @click="removeTodoItem(todo.id)"
+            ></i
         ></span>
     </li>
 </template>
@@ -18,9 +21,13 @@ export default {
             required: true,
         },
     },
+    emits: ["settododone", "removetodoitem","maketodoimportant"],
     methods: {
         setTodoDone(id) {
             this.$emit("settododone", id);
+        },
+        removeTodoItem(id) {
+            this.$emit("removetodoitem", id);
         },
     },
 };
@@ -54,6 +61,12 @@ li {
         & > .todo-btn > .fa-check-circle-o {
             color: green;
         }
+    }
+    &.important{
+        &>.todo{
+            color:red;
+        }
+        
     }
 }
 </style>

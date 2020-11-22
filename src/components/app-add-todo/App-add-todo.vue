@@ -1,19 +1,19 @@
 <template>
-    <div class="app-add-todo">
-        <input
-            id=""
-            v-model="inputValue"
-            type="text"
-            name=""
-            @keydown.enter="getInputValue"
-        />
-        <button class="btn btn-secondary" @click="getInputValue">Add</button>
-    </div>
+    <input
+        id=""
+        v-model="inputValue"
+        type="text"
+        name=""
+        class="col-9"
+        @keydown.enter="getInputValue"
+    />
+    <button class="btn btn-secondary col-2" @click="getInputValue">Add</button>
 </template>
 
 <script>
 export default {
     name: "AppAddTodo",
+    emits: ["addtodo"],
     data() {
         return {
             inputValue: "",
@@ -32,16 +32,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.app-add-todo {
-    display: flex;
-    flex-flow: row wrap;
-    & > input {
-        flex: 1 0;
-    }
-    & > button {
-        width: 6em;
-        margin-left: 2em;
-    }
-}
-</style>
+<style lang="scss"></style>

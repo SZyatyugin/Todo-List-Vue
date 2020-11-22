@@ -1,8 +1,24 @@
 <template>
-    <div class="app-filters">
-        <button v-for="elem in filters" :key="elem" class="btn btn-info">
-            {{ elem }}
-        </button>
+    <div class="input-group">
+        <input v-model="inputSearch" type="text" class="form-control"
+        placeholder="Search todo" aria-label="Recipient's username with two
+        button addons" aria-describedby="button-addon4"
+        @input="()=>{this.$emit('searchtodosinputvalue',inputSearch)}">
+        <div id="button-addon4" class="input-group-append">
+            <button
+                v-for="elem in filters"
+                :key="elem"
+                class="btn btn-outline-secondary"
+                type="button"
+                @click="
+                    () => {
+                        this.$emit('getfilter', elem);
+                    }
+                "
+            >
+                {{ elem }}
+            </button>
+        </div>
     </div>
 </template>
 
@@ -15,15 +31,12 @@ export default {
             required: true,
         },
     },
+    data() {
+        return {
+            inputSearch: "",
+        };
+    },
 };
 </script>
 
-<style lang="scss">
-.app-filters {
-    padding: 1em;
-    width: 50%;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
-}
-</style>
+<style lang="scss"></style>
