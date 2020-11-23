@@ -105,7 +105,7 @@ export default {
         },
         removeTodoItem(id) {
             console.log(this.todoStore);
-            let elemToDelete=this.todoStore.findIndex((elem,index)=>{if(elem.id===id){console.log(elem.id===id);return index;}});
+            let elemToDelete=this.todoStore.findIndex((elem)=>{if(elem.id===id){console.log(elem.id===id);return elem;}});
             console.log(elemToDelete);
             let newTodos = [...this.todoStore.slice(0,elemToDelete),...this.todoStore.slice(elemToDelete+1,this.todoStore.length)];
             console.log(newTodos);
