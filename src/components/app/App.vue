@@ -12,7 +12,6 @@
             </div>
             <div class="row">
                 <router-view></router-view>
-                <!-- <AppTodoList/> -->
             </div>
         </div>
     </div>
@@ -22,7 +21,7 @@
 import AppHeader from "../app-header";
 import AppAddTodo from "../app-add-todo";
 import AppFilters from "../app-filters";
-// import AppTodoList from "../app-todo-list";
+
 
 export default {
     name: "App",
@@ -30,7 +29,6 @@ export default {
         AppHeader,
         AppAddTodo,
         AppFilters,
-        // // AppTodoList,
     },
     data() {
         return {
