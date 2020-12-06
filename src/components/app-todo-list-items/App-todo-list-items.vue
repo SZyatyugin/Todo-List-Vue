@@ -1,18 +1,26 @@
 <template>
-    <li :class="{ done: todo.done, important:todo.important }">
-        <span class="todo" @click="setTodoDone(todo.id)">{{ todo.name }}</span
+    <li :class="{ done: todo.done, important: todo.important }">
+        <span class="todo" @click="setDone(todo.id)">{{ todo.name }}</span
         ><span class="todo-btn"
             ><i v-if="todo.done" class="fa fa-check-circle-o"></i
-            ><i class="fa fa-exclamation-circle" @click="()=>{this.$emit('maketodoimportant',todo.id)}"></i
+            ><i
+                class="fa fa-exclamation-circle"
+                @click="
+                    () => {
+                        makeTodoImportant(todo.id);
+                    }
+                "
+            ></i
             ><i
                 class="fa fa-times-circle-o"
-                @click="removeTodoItem(todo.id)"
+                @click="removeItem(todo.id)"
             ></i
         ></span>
     </li>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
     name: "AppTodoListItems",
     props: {
@@ -21,13 +29,13 @@ export default {
             required: true,
         },
     },
-    emits: ["settododone", "removetodoitem","maketodoimportant"],
     methods: {
-        setTodoDone(id) {
-            this.$emit("settododone", id);
+        ...mapActions(["setTodoDone", "makeTodoImportant", "removeTodoItem"]),
+        setDone(id) {
+            this.setTodoDone(id);
         },
-        removeTodoItem(id) {
-            this.$emit("removetodoitem", id);
+        removeItem(id) {
+            this.removeTodoItem(id);
         },
     },
 };
@@ -62,11 +70,10 @@ li {
             color: green;
         }
     }
-    &.important{
-        &>.todo{
-            color:red;
+    &.important {
+        & > .todo {
+            color: red;
         }
-        
     }
 }
 </style>

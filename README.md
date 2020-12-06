@@ -1,5 +1,7 @@
 # todo-list-vue
 
+Projected created by using Vue, Vue Router and Vuex.
+
 ## Project setup
 ```
 npm install

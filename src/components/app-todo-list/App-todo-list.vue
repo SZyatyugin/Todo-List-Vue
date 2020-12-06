@@ -1,40 +1,29 @@
 <template>
-    <ul class="col-12">
+    <ul v-if="todoListItems.length != 0" class="col-12">
         <AppTodoListItems
-            v-for="elem in todoStore"
+            v-for="elem in todoListItems"
             :key="elem.id"
             :todo="elem"
-            @settododone="settododone"
-            @removetodoitem="removetodoitem"
-            @maketodoimportant="maketodoimportant"
         />
     </ul>
 </template>
 
 <script>
 import AppTodoListItems from "../app-todo-list-items";
+import { mapGetters } from "vuex";
 export default {
     name: "AppTodoList",
     components: {
         AppTodoListItems,
     },
-    props: {
-        todoStore: {
-            type: Array,
-            required: true,
+
+    computed: {
+        todoListItems() {
+            return this.filterTodos()(this.searchedTodos());
         },
-        settododone: {
-            type: Function,
-            required: true,
-        },
-        removetodoitem: {
-            type: Function,
-            required: true,
-        },
-        maketodoimportant:{
-            type:Function,
-            required:true,
-        },
+    },
+    methods: {
+        ...mapGetters(["filterTodos", "searchedTodos"]),
     },
 };
 </script>

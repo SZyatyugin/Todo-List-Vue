@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
     name: "AppAddTodo",
     emits: ["addtodo"],
@@ -20,12 +22,13 @@ export default {
         };
     },
     methods: {
+        ...mapActions(["addTodo"]),
         getInputValue(e) {
             if (this.inputValue === "") {
                 e.preventDefault();
                 return;
             }
-            this.$emit("addtodo", this.inputValue);
+            this.addTodo(this.inputValue);
             this.inputValue = "";
         },
     },
